@@ -1,0 +1,24 @@
+# Core testing libraries
+pytest
+selenium
+
+# Reporting
+pytest-html
+pytest-xdist       # for parallel execution
+pytest-rerunfailures
+
+# Config & data handling
+pyyaml             # for config.yaml
+python-dotenv      # if you want .env support
+openpyxl           # for Excel data-driven testing
+pandas             # for working with tabular data
+
+# Logging & utils
+pytest-logger
+faker              # for generating test data
+
+# Optional - screenshots, attachments, allure reporting
+allure-pytest
+
+# (Optional) WebDriver manager - no need to manually download drivers
+webdriver-manager
