@@ -1,9 +1,11 @@
+import  pytest,requests
 from pages.login_page import LoginPage
-import  pytest
 
 
-class TestLogin:
-
-    def test_login(self,driver,config):
-        login = LoginPage(driver, config)
-        login.open_url()
+@pytest.mark.login
+def test_login_valid(driver,config):
+    login = LoginPage(driver,
+                      config)
+    data=  {'username':'prashatn.divase@benisontech.com',
+           'password':"Test"}
+    login.open_url()

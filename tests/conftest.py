@@ -1,3 +1,4 @@
+import logging
 import os.path
 
 import pytest
@@ -76,3 +77,23 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
     report.class_name = item.cls.__name__ if item.cls else "NoClass"
     report.test_name = item.name
+
+@pytest.fixture(scope='session', autouse=True)
+def setup_logger():
+    os.makedirs('logs',exist_ok=True)
+    log_file = os.path.join("logs", f"test_log_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log")
+
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - [%(levelname)s] - %(name)s - %(message)s",
+        handlers=[
+        logging.FileHandler(log_file,'a', encoding='utf-8'),
+        logging.StreamHandler()]
+    )
+    logger = logging.getLogger('pytest-automation')
+    logger.info("========== Test Execution Started ==========")
+    yield logger
+    logger.info("========== Test Execution Started ==========")
